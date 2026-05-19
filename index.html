@@ -3,26 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Orçamento – Campanha Digital Completa</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Briefing Estratégico — Tríade Soluções</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #0a0a0a;
-    --dark: #111214;
-    --card: #16181c;
-    --border: #252830;
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --gold-dim: rgba(201,168,76,0.12);
-    --gold-glow: rgba(201,168,76,0.25);
-    --white: #f5f5f0;
-    --muted: #7a7d85;
+    --black: #080809;
+    --dark: #0f0f11;
+    --card: #13141a;
+    --card2: #17181f;
+    --border: #23242e;
+    --border2: #2e303d;
+    --gold: #c8a84b;
+    --gold2: #e2c97e;
+    --gold-dim: rgba(200,168,75,0.1);
+    --gold-glow: rgba(200,168,75,0.18);
+    --white: #f2f1ec;
+    --muted: #6b6e7a;
+    --muted2: #9295a0;
     --green: #3ecf8e;
-    --red: #ff6b6b;
-    --blue: #4fa3e0;
+    --red: #e05c5c;
+    --blue: #5b9bd5;
+    --input-bg: #0d0e12;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--black);
@@ -30,1061 +36,1100 @@
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
     line-height: 1.6;
+    min-height: 100vh;
   }
 
-  /* ── HEADER ── */
-  .header {
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1508 50%, #0f0f0f 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 48px 60px 40px;
+  /* ── PROGRESS BAR ── */
+  .progress-rail {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--border);
+    z-index: 100;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
     position: relative;
     overflow: hidden;
   }
-  .header::before {
+  .hero::before {
     content: '';
     position: absolute;
-    top: -80px; right: -80px;
-    width: 320px; height: 320px;
-    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(200,168,75,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 80% 20%, rgba(200,168,75,0.04) 0%, transparent 60%);
     pointer-events: none;
   }
-  .header::after {
-    content: 'ORÇAMENTO';
+  .hero-lines {
     position: absolute;
-    right: 60px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 120px;
-    color: rgba(201,168,76,0.04);
-    letter-spacing: 8px;
-    user-select: none;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+    pointer-events: none;
   }
 
-  .badge {
+  .hero-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: var(--gold-dim);
-    border: 1px solid var(--gold);
-    color: var(--gold);
+    gap: 8px;
     font-family: 'DM Mono', monospace;
     font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    padding: 4px 12px;
-    border-radius: 2px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  .badge::before { content: '◆'; font-size: 7px; }
-
-  .header h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 52px;
     letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(200,168,75,0.3);
+    background: var(--gold-dim);
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+  .hero-eyebrow::before { content: '◆'; font-size: 6px; }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 300;
+    letter-spacing: -1px;
+    line-height: 1.05;
     color: var(--white);
-    line-height: 1;
     margin-bottom: 8px;
   }
-  .header h1 span { color: var(--gold); }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold2);
+  }
 
-  .header-sub {
-    color: var(--muted);
-    font-size: 13px;
+  .hero-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--muted2);
     font-weight: 300;
-    letter-spacing: 0.5px;
-    max-width: 500px;
+    max-width: 460px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
   }
 
-  .header-meta {
+  .hero-meta {
     display: flex;
-    gap: 32px;
-    margin-top: 28px;
+    gap: 40px;
+    justify-content: center;
+    margin-bottom: 56px;
   }
-  .meta-item { display: flex; flex-direction: column; gap: 2px; }
-  .meta-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
+  .hero-meta-item { text-align: center; }
+  .hero-meta-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--gold2);
+    line-height: 1;
+  }
+  .hero-meta-label {
+    font-size: 11px;
     color: var(--muted);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  .btn-start {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: #080809;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
   }
-  .meta-value {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gold-light);
+  .btn-start:hover { background: var(--gold2); transform: translateY(-1px); }
+  .btn-start svg { width: 14px; height: 14px; }
+
+  /* ── FORM WRAPPER ── */
+  .form-wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
   }
 
-  /* ── LAYOUT ── */
-  .container { max-width: 960px; margin: 0 auto; padding: 48px 60px; }
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 64px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-  /* ── SECTION TITLE ── */
-  .section-title {
+  .section-header {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
-    margin-top: 48px;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
   }
-  .section-title:first-of-type { margin-top: 0; }
-  .section-num {
-    font-family: 'Bebas Neue', sans-serif;
+  .section-index {
+    font-family: 'Cormorant Garamond', serif;
     font-size: 11px;
     letter-spacing: 3px;
     color: var(--gold);
-    background: var(--gold-dim);
-    border: 1px solid var(--gold);
-    padding: 2px 8px;
-    border-radius: 2px;
+    font-weight: 400;
   }
-  .section-title h2 {
-    font-family: 'Bebas Neue', sans-serif;
+  .section-title-text {
+    font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
-    letter-spacing: 2px;
+    font-weight: 500;
     color: var(--white);
+    letter-spacing: 0.5px;
   }
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, var(--border), transparent);
-  }
-
-  /* ── CARDS ── */
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 12px;
-  }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(255,255,255,0.01);
-  }
-  .card-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    font-size: 13px;
-  }
-  .card-icon {
-    width: 28px; height: 28px;
-    border-radius: 4px;
-    background: var(--gold-dim);
-    border: 1px solid rgba(201,168,76,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-  }
-  .card-tag {
+  .section-tag {
+    margin-left: auto;
     font-family: 'DM Mono', monospace;
     font-size: 9px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 2px;
   }
-  .tag-setup { background: rgba(79,163,224,0.15); color: var(--blue); border: 1px solid rgba(79,163,224,0.3); }
-  .tag-mensal { background: rgba(62,207,142,0.15); color: var(--green); border: 1px solid rgba(62,207,142,0.3); }
-  .tag-midia { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
-  .tag-obs { background: rgba(255,107,107,0.12); color: var(--red); border: 1px solid rgba(255,107,107,0.3); }
+  .tag-juridico { background: rgba(91,155,213,0.12); color: var(--blue); border: 1px solid rgba(91,155,213,0.25); }
+  .tag-produto { background: rgba(200,168,75,0.1); color: var(--gold); border: 1px solid rgba(200,168,75,0.25); }
+  .tag-publico { background: rgba(62,207,142,0.08); color: var(--green); border: 1px solid rgba(62,207,142,0.2); }
+  .tag-comercial { background: rgba(224,92,92,0.08); color: var(--red); border: 1px solid rgba(224,92,92,0.2); }
+  .tag-material { background: rgba(200,168,75,0.08); color: var(--gold2); border: 1px solid rgba(200,168,75,0.2); }
+  .tag-alinhamento { background: rgba(91,155,213,0.08); color: #8ab8e0; border: 1px solid rgba(91,155,213,0.2); }
 
-  .price-badge {
+  /* ── QUESTION ── */
+  .question {
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .q-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .q-badge {
     font-family: 'DM Mono', monospace;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--gold-light);
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
+  .badge-critico { background: rgba(224,92,92,0.15); color: var(--red); border: 1px solid rgba(224,92,92,0.25); }
+  .badge-importante { background: rgba(200,168,75,0.12); color: var(--gold); border: 1px solid rgba(200,168,75,0.25); }
+  .badge-util { background: rgba(91,155,213,0.1); color: var(--blue); border: 1px solid rgba(91,155,213,0.2); }
 
-  .card-body { padding: 0; }
-
-  .item-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: start;
-    padding: 12px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-    gap: 16px;
-  }
-  .item-row:last-child { border-bottom: none; }
-  .item-row:hover { background: rgba(255,255,255,0.015); }
-
-  .item-name {
+  .q-text {
     font-size: 13px;
     font-weight: 500;
     color: var(--white);
-    margin-bottom: 2px;
-  }
-  .item-desc {
-    font-size: 11px;
-    color: var(--muted);
     line-height: 1.5;
-    max-width: 540px;
-  }
-  .item-price {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--white);
-    white-space: nowrap;
-    text-align: right;
-  }
-  .item-price .unit {
-    display: block;
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 1px;
   }
 
-  /* ── ALERTA ── */
-  .alert {
-    background: rgba(201,168,76,0.06);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-left: 3px solid var(--gold);
-    border-radius: 4px;
-    padding: 14px 18px;
-    margin-bottom: 12px;
-    font-size: 12px;
-    color: #c9b87a;
-    line-height: 1.6;
-  }
-  .alert strong { color: var(--gold-light); }
-
-  .alert-red {
-    background: rgba(255,107,107,0.06);
-    border: 1px solid rgba(255,107,107,0.2);
-    border-left: 3px solid var(--red);
-    color: #e8a0a0;
-  }
-  .alert-red strong { color: var(--red); }
-
-  /* ── TOTALS ── */
-  .totals-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-top: 8px;
-  }
-
-  .total-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .total-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-  }
-  .total-card.setup::before { background: var(--blue); }
-  .total-card.mensal::before { background: var(--green); }
-  .total-card.investimento::before { background: var(--gold); }
-
-  .total-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-  .total-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    letter-spacing: 1px;
-    line-height: 1;
-  }
-  .total-card.setup .total-value { color: var(--blue); }
-  .total-card.mensal .total-value { color: var(--green); }
-  .total-card.investimento .total-value { color: var(--gold); }
-
-  .total-sub {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 6px;
-  }
-
-  /* ── GRAND TOTAL ── */
-  .grand-total {
-    background: linear-gradient(135deg, #1a1508, #111);
-    border: 1px solid var(--gold);
-    border-radius: 6px;
-    padding: 28px 32px;
-    margin-top: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-  }
-  .grand-total::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
-  }
-  .gt-left {}
-  .gt-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-  .gt-desc { font-size: 11px; color: var(--muted); }
-  .gt-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    letter-spacing: 2px;
-    color: var(--gold-light);
-    line-height: 1;
-  }
-  .gt-period {
-    font-size: 12px;
-    color: var(--muted);
-    text-align: right;
-    margin-top: 4px;
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* ── CRONOGRAMA ── */
-  .timeline {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-  }
-  .timeline-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 18px;
-  }
-  .tl-week {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-  .tl-title {
-    font-weight: 600;
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-  .tl-items { list-style: none; }
-  .tl-items li {
+  .q-hint {
     font-size: 11px;
     color: var(--muted);
-    padding: 3px 0;
-    padding-left: 12px;
-    position: relative;
-  }
-  .tl-items li::before {
-    content: '›';
-    position: absolute;
-    left: 0;
-    color: var(--gold);
+    margin-bottom: 10px;
+    padding-left: 52px;
+    line-height: 1.5;
+    font-style: italic;
   }
 
-  /* ── CONDIÇÕES ── */
-  .conditions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .condition-item {
-    background: var(--card);
+  /* INPUTS */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    width: 100%;
+    background: var(--input-bg);
     border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 18px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
   }
-  .cond-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-    margin-top: 1px;
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(200,168,75,0.08);
   }
-  .cond-title { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
-  .cond-text { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+  textarea { resize: vertical; min-height: 90px; }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6e7a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  select option { background: #13141a; }
 
-  /* ── FOOTER ── */
-  .footer {
-    border-top: 1px solid var(--border);
-    padding: 28px 60px;
+  /* RADIO / CHECKBOX GROUP */
+  .radio-group, .check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .radio-item, .check-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: var(--dark);
+    gap: 12px;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    background: var(--input-bg);
+    user-select: none;
+    -webkit-user-select: none;
+    min-height: 52px;
   }
-  .footer-brand {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 3px;
-    color: var(--gold);
+  .radio-item:hover, .check-item:hover {
+    border-color: var(--border2);
+    background: var(--card);
   }
-  .footer-info { font-size: 11px; color: var(--muted); text-align: right; }
+  .radio-item input, .check-item input { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+  .radio-item.selected, .check-item.selected {
+    border-color: var(--gold);
+    background: var(--gold-dim);
+  }
+  .radio-box {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--muted);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s;
+    pointer-events: none;
+  }
+  .check-box {
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    border: 2px solid var(--muted);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s;
+    pointer-events: none;
+  }
+  .radio-item.selected .radio-box { border-color: var(--gold); }
+  .check-item.selected .check-box { border-color: var(--gold); }
+  .radio-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: none;
+    pointer-events: none;
+  }
+  .check-tick { display: none; color: var(--gold); font-size: 14px; font-weight: 700; pointer-events: none; }
+  .radio-item.selected .radio-dot { display: block; }
+  .check-item.selected .check-tick { display: block; }
+  .radio-label, .check-label {
+    font-size: 13px;
+    color: var(--muted2);
+    pointer-events: none;
+    line-height: 1.4;
+  }
+  .radio-item.selected .radio-label,
+  .check-item.selected .check-label { color: var(--white); }
 
   /* ── DIVIDER ── */
   .divider {
     height: 1px;
     background: linear-gradient(to right, transparent, var(--border), transparent);
-    margin: 8px 0;
+    margin: 8px 0 28px;
   }
 
-  /* ── NOTA ESTRATÉGICA ── */
-  .strategy-box {
-    background: linear-gradient(135deg, rgba(62,207,142,0.04), rgba(79,163,224,0.04));
-    border: 1px solid rgba(62,207,142,0.2);
+  /* ── SUBMIT ── */
+  .submit-area {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
     border-radius: 6px;
-    padding: 20px 24px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 16px;
+  }
+  .submit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .submit-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: #080809;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { background: var(--gold2); transform: translateY(-1px); }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    display: none;
+    min-height: 80vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 40px;
+  }
+  .success-screen.show { display: flex; }
+  .success-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(62,207,142,0.1);
+    border: 1px solid rgba(62,207,142,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 24px;
+  }
+  .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--white);
     margin-bottom: 12px;
   }
-  .strategy-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px;
-    letter-spacing: 2px;
-    color: var(--green);
-    margin-bottom: 10px;
-  }
-  .strategy-text { font-size: 12px; color: #9bb; line-height: 1.7; }
+  .success-sub { font-size: 14px; color: var(--muted2); max-width: 400px; }
 
-  @media print {
-    body { background: white; color: black; }
-    .header { background: #f5f5f0; }
+  /* ── STICKY FOOTER ── */
+  .sticky-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(8,8,9,0.92);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+  }
+  .nav-progress-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .nav-progress-text span { color: var(--gold2); }
+
+  /* ── ANIMATIONS ── */
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.2s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+  .section:nth-child(6) { animation-delay: 0.3s; }
+
+  /* ── CLIENT INFO ── */
+  .client-info {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .client-info-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gold2);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+  .client-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .client-field label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  @media (max-width: 600px) {
+    .client-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 24px; }
+    .form-wrapper { padding: 48px 20px 100px; }
+    .hero { padding: 60px 20px; }
+    .sticky-nav { padding: 12px 20px; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="badge">Proposta Comercial</div>
-  <h1>CAMPANHA DIGITAL <span>COMPLETA</span></h1>
-  <p class="header-sub">Estrutura completa do zero — Google Ads, Meta Ads, Landing Page, Hospedagem e Social Media</p>
-  <div class="header-meta">
-    <div class="meta-item">
-      <span class="meta-label">Segmento</span>
-      <span class="meta-value">Importador – Equipamentos de Academia</span>
+<div class="progress-rail"><div class="progress-fill" id="progressBar"></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-eyebrow">Tríade Soluções — Briefing Estratégico</div>
+  <h1>Antes de <em>começarmos,</em><br>precisamos entender você.</h1>
+  <p class="hero-sub">Este formulário foi desenhado para mapear tudo que é essencial antes de estruturar sua campanha. Seja específico — cada detalhe conta.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hero-meta-num">28</div>
+      <div class="hero-meta-label">Perguntas</div>
     </div>
-    <div class="meta-item">
-      <span class="meta-label">Ticket Médio</span>
-      <span class="meta-value">R$ 23.000 – R$ 120.000</span>
+    <div class="hero-meta-item">
+      <div class="hero-meta-num">6</div>
+      <div class="hero-meta-label">Seções</div>
     </div>
-    <div class="meta-item">
-      <span class="meta-label">Estrutura</span>
-      <span class="meta-value">Do zero</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Data</span>
-      <span class="meta-value">Maio / 2026</span>
+    <div class="hero-meta-item">
+      <div class="hero-meta-num">~10</div>
+      <div class="hero-meta-label">Minutos</div>
     </div>
   </div>
+  <a href="#formulario" class="btn-start">
+    Iniciar briefing
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </a>
+</section>
+
+<!-- FORMULÁRIO -->
+<div id="formulario" class="form-wrapper">
+
+  <!-- DADOS DO CLIENTE -->
+  <div class="client-info">
+    <div class="client-info-title">Identificação</div>
+    <div class="client-grid">
+      <div class="client-field">
+        <label>Nome completo</label>
+        <input type="text" placeholder="Seu nome" id="nome">
+      </div>
+      <div class="client-field">
+        <label>Empresa</label>
+        <input type="text" placeholder="Nome da empresa" id="empresa">
+      </div>
+      <div class="client-field">
+        <label>WhatsApp</label>
+        <input type="tel" placeholder="(21) 99999-9999" id="whatsapp">
+      </div>
+      <div class="client-field">
+        <label>E-mail</label>
+        <input type="email" placeholder="seu@email.com.br" id="email">
+      </div>
+    </div>
+  </div>
+
+  <div id="main-form">
+
+  <!-- SEÇÃO 01 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-index">01 — 06</span>
+      <span class="section-title-text">Contrato & Acordo Comercial</span>
+      <span class="section-tag tag-juridico">Jurídico</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Você possui contrato assinado com a SPlan Brasil?</span>
+      </div>
+      <div class="q-hint">Sem contrato formal, qualquer estrutura digital construída pode beneficiar terceiros.</div>
+      <div class="radio-group" data-name="q1">
+        <label class="radio-item"><input type="radio" name="q1" value="Sim, contrato assinado"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim, contrato assinado e vigente</span></label>
+        <label class="radio-item"><input type="radio" name="q1" value="Sim, mas informal"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim, mas é um acordo informal / e-mail</span></label>
+        <label class="radio-item"><input type="radio" name="q1" value="Ainda não"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Ainda não, estamos negociando</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">O contrato prevê alguma exclusividade?</span>
+      </div>
+      <div class="q-hint">Se outro revendedor puder fazer a mesma campanha, você vai concorrer com alguém vendendo o mesmo produto.</div>
+      <div class="radio-group" data-name="q2">
+        <label class="radio-item"><input type="radio" name="q2" value="Exclusividade total"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Exclusividade total (território + canal)</span></label>
+        <label class="radio-item"><input type="radio" name="q2" value="Exclusividade territorial"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Exclusividade territorial apenas</span></label>
+        <label class="radio-item"><input type="radio" name="q2" value="Exclusividade de canal digital"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Exclusividade de canal digital apenas</span></label>
+        <label class="radio-item"><input type="radio" name="q2" value="Sem exclusividade"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sem exclusividade — revenda aberta</span></label>
+        <label class="radio-item"><input type="radio" name="q2" value="Não sei"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não sei / não está claro no contrato</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Qual é a sua margem ou comissão por venda? Descreva por produto se variar.</span>
+      </div>
+      <div class="q-hint">Isso define o ROI real da campanha e quais produtos valem priorizar nos anúncios.</div>
+      <textarea placeholder="Ex: no modelo de R$ 23k ganho R$ 2.500 fixo. No modelo de R$ 140k ganho ~R$ 30k. Etc." id="q3"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-importante">importante</span>
+        <span class="q-text">O contrato tem prazo mínimo de vigência? Quando renova?</span>
+      </div>
+      <div class="q-hint">Precisamos saber se o cliente vai continuar vendendo por tempo suficiente para o marketing dar retorno.</div>
+      <input type="text" placeholder="Ex: Vigência de 12 meses, renova em jan/2026" id="q4">
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">A SPlan Brasil vende diretamente para o consumidor final (D2C)?</span>
+      </div>
+      <div class="q-hint">Se sim, o lead gerado pela campanha pode comprar no Instagram da própria SPlan sem passar por você.</div>
+      <div class="radio-group" data-name="q5">
+        <label class="radio-item"><input type="radio" name="q5" value="Não, só por revendedores"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não — vendem apenas por revendedores</span></label>
+        <label class="radio-item"><input type="radio" name="q5" value="Sim, vendem direto também"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — vendem direto e por revendedores</span></label>
+        <label class="radio-item"><input type="radio" name="q5" value="Não sei"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não sei</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 02 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-index">02 — 06</span>
+      <span class="section-title-text">Produto & Portfólio</span>
+      <span class="section-tag tag-produto">Produto</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Quais modelos você tem autorização para vender? Liste com preço se possível.</span>
+      </div>
+      <textarea placeholder="Ex: Modelo SPlan-X (R$ 23.000), Modelo SPlan-Pro (R$ 80.000), Modelo SPlan-Elite (R$ 140.000)..." id="q6"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Qual é o modelo de maior margem para você? E o de mais fácil venda?</span>
+      </div>
+      <div class="q-hint">Raramente são o mesmo produto. A estratégia de anúncio muda dependendo do que você quer priorizar.</div>
+      <textarea placeholder="Ex: Maior margem = Elite (R$ 140k). Mais fácil de vender = modelo intermediário por ter menor barreira de entrada." id="q7"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Você tem acesso a um equipamento instalado para fotografar ou filmar?</span>
+      </div>
+      <div class="q-hint">Um vídeo do produto funcionando num ambiente de alto padrão vale mais do que R$ 3.000 em anúncio com imagem genérica.</div>
+      <div class="radio-group" data-name="q8">
+        <label class="radio-item"><input type="radio" name="q8" value="Sim, já tenho local"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — já tenho local e equipamento disponível</span></label>
+        <label class="radio-item"><input type="radio" name="q8" value="Posso conseguir"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Posso conseguir, mas precisa de agendamento</span></label>
+        <label class="radio-item"><input type="radio" name="q8" value="A SPlan tem material"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">A SPlan fornece material fotográfico/vídeo oficial</span></label>
+        <label class="radio-item"><input type="radio" name="q8" value="Não tenho"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não tenho acesso ainda</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-importante">importante</span>
+        <span class="q-text">Qual é o prazo de entrega e quem realiza a instalação?</span>
+      </div>
+      <div class="q-hint">Cliente de alto ticket vai perguntar isso antes de fechar. Precisa estar na landing page.</div>
+      <textarea placeholder="Ex: Entrega em 30 dias após pedido. Instalação feita por técnico credenciado SPlan Brasil." id="q9"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-importante">importante</span>
+        <span class="q-text">O produto tem garantia? Existe assistência técnica no Brasil?</span>
+      </div>
+      <div class="q-hint">Para produto importado de R$ 140k, essa é a objeção número 1. Precisa estar clara na landing page.</div>
+      <textarea placeholder="Ex: 2 anos de garantia. Assistência técnica autorizada em SP, RJ e BSB." id="q10"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-importante">importante</span>
+        <span class="q-text">Existe algum case de sucesso, cliente atual ou piloto já instalado no Brasil?</span>
+      </div>
+      <div class="q-hint">Prova social é o ativo mais poderoso para vender alto ticket. Um depoimento real vale muito.</div>
+      <div class="radio-group" data-name="q11">
+        <label class="radio-item"><input type="radio" name="q11" value="Sim, tenho cases"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — tenho clientes com o produto instalado</span></label>
+        <label class="radio-item"><input type="radio" name="q11" value="A SPlan tem cases"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">A SPlan tem cases internacionais que posso usar</span></label>
+        <label class="radio-item"><input type="radio" name="q11" value="Ainda não"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Ainda não — seremos os pioneiros no Brasil</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 03 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-index">03 — 06</span>
+      <span class="section-title-text">Público & Território</span>
+      <span class="section-tag tag-publico">Público</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Você atende todo o Brasil ou tem restrição regional no contrato?</span>
+      </div>
+      <div class="radio-group" data-name="q12">
+        <label class="radio-item"><input type="radio" name="q12" value="Todo o Brasil"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Todo o Brasil</span></label>
+        <label class="radio-item"><input type="radio" name="q12" value="Região específica"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Região específica — vou detalhar abaixo</span></label>
+      </div>
+      <textarea placeholder="Se regional, descreva quais estados ou regiões." id="q12b" style="margin-top:10px"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Quem é o seu comprador ideal? Marque todos que se aplicam.</span>
+      </div>
+      <div class="check-group" data-name="q13">
+        <label class="check-item"><input type="checkbox" name="q13" value="Home gym de luxo"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Morador de alto padrão — home gym de luxo</span></label>
+        <label class="check-item"><input type="checkbox" name="q13" value="Academia premium"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Proprietário de academia premium / boutique</span></label>
+        <label class="check-item"><input type="checkbox" name="q13" value="Hotel e resort"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Hotel, resort ou pousada de luxo</span></label>
+        <label class="check-item"><input type="checkbox" name="q13" value="Condomínio de luxo"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Condomínio de alto padrão / síndico</span></label>
+        <label class="check-item"><input type="checkbox" name="q13" value="Empresa corporativa"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Empresa / academia corporativa</span></label>
+        <label class="check-item"><input type="checkbox" name="q13" value="Clínica e spa"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Clínica de saúde, spa ou espaço wellness</span></label>
+        <label class="check-item"><input type="checkbox" name="q13" value="Investidor"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Investidor abrindo novo negócio fitness</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-importante">importante</span>
+        <span class="q-text">Você já tem algum contato ou relacionamento com algum desses perfis de comprador?</span>
+      </div>
+      <div class="q-hint">Um lead quente existente pode virar o primeiro case e dar munição para os anúncios.</div>
+      <textarea placeholder="Ex: Tenho um contato no Condomínio X em Alphaville que pode ter interesse. Ou: não tenho contatos ainda." id="q14"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-util">útil</span>
+        <span class="q-text">Tem algum nicho ou segmento que você quer evitar ou que o contrato não permite?</span>
+      </div>
+      <input type="text" placeholder="Ex: Governo, hospitais, escolas... ou nenhuma restrição." id="q15">
+    </div>
+  </div>
+
+  <!-- SEÇÃO 04 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-index">04 — 06</span>
+      <span class="section-title-text">Processo Comercial</span>
+      <span class="section-tag tag-comercial">Comercial</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Quem vai atender os leads que chegarem — você mesmo, um vendedor ou equipe?</span>
+      </div>
+      <div class="radio-group" data-name="q16">
+        <label class="radio-item"><input type="radio" name="q16" value="Eu mesmo"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Eu mesmo faço o atendimento</span></label>
+        <label class="radio-item"><input type="radio" name="q16" value="Vendedor dedicado"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Tenho um vendedor dedicado para isso</span></label>
+        <label class="radio-item"><input type="radio" name="q16" value="Equipe comercial"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Temos uma equipe comercial</span></label>
+        <label class="radio-item"><input type="radio" name="q16" value="Ainda não definido"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Ainda não está definido</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Qual é o canal preferido para receber e atender leads?</span>
+      </div>
+      <div class="radio-group" data-name="q17">
+        <label class="radio-item"><input type="radio" name="q17" value="WhatsApp"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">WhatsApp (número comercial)</span></label>
+        <label class="radio-item"><input type="radio" name="q17" value="Formulário + e-mail"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Formulário no site + retorno por e-mail</span></label>
+        <label class="radio-item"><input type="radio" name="q17" value="Telefone"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Telefone / ligação</span></label>
+        <label class="radio-item"><input type="radio" name="q17" value="WhatsApp + e-mail"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">WhatsApp + e-mail (ambos)</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Você consegue responder leads em dias úteis em até 2 horas?</span>
+      </div>
+      <div class="q-hint">Isso precisa estar no contrato de marketing. Lead de alto ticket esfria rápido.</div>
+      <div class="radio-group" data-name="q18">
+        <label class="radio-item"><input type="radio" name="q18" value="Sim, até 2h"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — consigo responder em até 2 horas</span></label>
+        <label class="radio-item"><input type="radio" name="q18" value="No mesmo dia"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">No mesmo dia, mas pode levar mais de 2h</span></label>
+        <label class="radio-item"><input type="radio" name="q18" value="Pode demorar mais"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Pode demorar mais dependendo da agenda</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-importante">importante</span>
+        <span class="q-text">Você já tem uma proposta comercial ou script de vendas pronto para enviar quando o lead chegar?</span>
+      </div>
+      <div class="radio-group" data-name="q19">
+        <label class="radio-item"><input type="radio" name="q19" value="Sim, está pronto"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — já tenho proposta e script pronto</span></label>
+        <label class="radio-item"><input type="radio" name="q19" value="Em desenvolvimento"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Estou desenvolvendo</span></label>
+        <label class="radio-item"><input type="radio" name="q19" value="Não tenho ainda"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Ainda não tenho — preciso montar</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-importante">importante</span>
+        <span class="q-text">Qual é o ciclo médio esperado de fechamento de uma venda?</span>
+      </div>
+      <div class="q-hint">Isso define quando vamos cobrar resultados e como estruturamos o remarketing.</div>
+      <div class="radio-group" data-name="q20">
+        <label class="radio-item"><input type="radio" name="q20" value="Menos de 15 dias"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Menos de 15 dias</span></label>
+        <label class="radio-item"><input type="radio" name="q20" value="15 a 30 dias"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">15 a 30 dias</span></label>
+        <label class="radio-item"><input type="radio" name="q20" value="30 a 60 dias"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">30 a 60 dias</span></label>
+        <label class="radio-item"><input type="radio" name="q20" value="Mais de 60 dias"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Mais de 60 dias — ciclo longo consultivo</span></label>
+        <label class="radio-item"><input type="radio" name="q20" value="Não sei ainda"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não sei ainda</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 05 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-index">05 — 06</span>
+      <span class="section-title-text">Identidade & Material</span>
+      <span class="section-tag tag-material">Material</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Você tem a logo da sua empresa em alta resolução (PNG transparente ou SVG)?</span>
+      </div>
+      <div class="radio-group" data-name="q21">
+        <label class="radio-item"><input type="radio" name="q21" value="Sim, tenho"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — tenho logo em alta resolução</span></label>
+        <label class="radio-item"><input type="radio" name="q21" value="Tenho mas baixa qualidade"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Tenho, mas só em baixa qualidade</span></label>
+        <label class="radio-item"><input type="radio" name="q21" value="Não tenho"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não tenho — precisa ser criada</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">A SPlan fornece fotos e vídeos oficiais do produto para revendedores usarem?</span>
+      </div>
+      <div class="radio-group" data-name="q22">
+        <label class="radio-item"><input type="radio" name="q22" value="Sim, fornece material"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — já tenho acesso ao material deles</span></label>
+        <label class="radio-item"><input type="radio" name="q22" value="Fornece mas preciso solicitar"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Fornece, mas preciso solicitar formalmente</span></label>
+        <label class="radio-item"><input type="radio" name="q22" value="Não fornece"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não fornece — precisarei produzir</span></label>
+        <label class="radio-item"><input type="radio" name="q22" value="Não sei"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não sei</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-util">útil</span>
+        <span class="q-text">Tem alguma preferência de identidade visual — cores, estilo, referências de marcas que admira?</span>
+      </div>
+      <textarea placeholder="Ex: Quero algo sofisticado como a Apple. Cores escuras, premium. Ou: sem preferência, confio no trabalho de vocês." id="q23"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Você tem CNPJ ativo e e-mail profissional para criar as contas de anúncio?</span>
+      </div>
+      <div class="radio-group" data-name="q24">
+        <label class="radio-item"><input type="radio" name="q24" value="Sim, tenho os dois"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — CNPJ ativo e e-mail profissional</span></label>
+        <label class="radio-item"><input type="radio" name="q24" value="Tenho CNPJ mas não e-mail"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Tenho CNPJ mas não tenho e-mail profissional ainda</span></label>
+        <label class="radio-item"><input type="radio" name="q24" value="Não tenho CNPJ"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Ainda não tenho CNPJ</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Tem cartão de crédito empresarial disponível para vincular às plataformas de anúncio?</span>
+      </div>
+      <div class="q-hint">Google Ads e Meta Ads cobram direto no cartão. Sem isso, não tem como subir campanha.</div>
+      <div class="radio-group" data-name="q25">
+        <label class="radio-item"><input type="radio" name="q25" value="Sim, cartão empresarial"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — tenho cartão empresarial disponível</span></label>
+        <label class="radio-item"><input type="radio" name="q25" value="Só cartão pessoal"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Só cartão pessoal no momento</span></label>
+        <label class="radio-item"><input type="radio" name="q25" value="Precisarei providenciar"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Precisarei providenciar</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 06 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-index">06 — 06</span>
+      <span class="section-title-text">Expectativas & Alinhamento</span>
+      <span class="section-tag tag-alinhamento">Alinhamento</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Qual é a sua expectativa de resultado para o primeiro mês de campanha?</span>
+      </div>
+      <div class="q-hint">Mês 1 é setup e aprendizado — não é mês de venda. Precisamos alinhar isso antes de começar.</div>
+      <textarea placeholder="Descreva o que você espera ver acontecer no primeiro mês..." id="q26"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-critico">crítico</span>
+        <span class="q-text">Você entende que o marketing digital gera o lead, mas a conversão em venda é responsabilidade da sua equipe comercial?</span>
+      </div>
+      <div class="radio-group" data-name="q27">
+        <label class="radio-item"><input type="radio" name="q27" value="Sim, entendo claramente"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Sim — entendo claramente essa divisão de responsabilidades</span></label>
+        <label class="radio-item"><input type="radio" name="q27" value="Entendo mas tenho dúvidas"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Entendo, mas tenho dúvidas sobre como funciona na prática</span></label>
+        <label class="radio-item"><input type="radio" name="q27" value="Não entendia isso"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Não sabia disso — preciso entender melhor</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-importante">importante</span>
+        <span class="q-text">Qual o investimento mensal em mídia paga que você está disposto a manter por pelo menos 3 meses?</span>
+      </div>
+      <div class="radio-group" data-name="q28a">
+        <label class="radio-item"><input type="radio" name="q28a" value="Até R$ 1.000"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Até R$ 1.000/mês</span></label>
+        <label class="radio-item"><input type="radio" name="q28a" value="R$ 1.000 a R$ 1.500"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">R$ 1.000 a R$ 1.500/mês</span></label>
+        <label class="radio-item"><input type="radio" name="q28a" value="R$ 1.500 a R$ 3.000"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">R$ 1.500 a R$ 3.000/mês</span></label>
+        <label class="radio-item"><input type="radio" name="q28a" value="Acima de R$ 3.000"><div class="radio-box"><div class="radio-dot"></div></div><span class="radio-label">Acima de R$ 3.000/mês</span></label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">
+        <span class="q-badge badge-util">útil</span>
+        <span class="q-text">Tem algo importante que não foi perguntado e que você quer que a gente saiba?</span>
+      </div>
+      <textarea placeholder="Observações, contextos adicionais, dúvidas, restrições ou qualquer coisa relevante..." id="q_extra" style="min-height:110px"></textarea>
+    </div>
+
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-area">
+    <div class="submit-title">Tudo certo?</div>
+    <p class="submit-sub">Revise suas respostas antes de enviar. Após o envio, entraremos em contato em até 24 horas com a análise completa e os próximos passos.</p>
+    <button class="btn-submit" onclick="submitForm()">
+      Enviar briefing
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  </div><!-- end main-form -->
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Briefing recebido.</div>
+    <p class="success-sub">Obrigado por dedicar seu tempo a responder com cuidado. Analisaremos tudo e entraremos em contato em até 24 horas com os próximos passos.</p>
+  </div>
+
+</div><!-- end form-wrapper -->
+
+<!-- STICKY NAV -->
+<div class="sticky-nav">
+  <span class="nav-progress-text">Progresso: <span id="navCount">0</span> de 28 respondidas</span>
+  <span class="nav-progress-text" style="color:var(--muted)">Tríade Soluções — Briefing Estratégico</span>
 </div>
 
-<div class="container">
+<script>
+  // Radio/Checkbox interactivity
+  document.querySelectorAll('.radio-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      var name = item.querySelector('input').name;
+      document.querySelectorAll('.radio-item').forEach(function(other) {
+        if (other.querySelector('input').name === name) {
+          other.classList.remove('selected');
+          other.querySelector('input').checked = false;
+        }
+      });
+      item.querySelector('input').checked = true;
+      item.classList.add('selected');
+      updateProgress();
+    });
+  });
 
-  <!-- NOTA ESTRATÉGICA -->
-  <div class="section-title">
-    <span class="section-num">ESTRATÉGIA</span>
-    <h2>Visão Geral da Campanha</h2>
-    <div class="section-line"></div>
-  </div>
+  document.querySelectorAll('.check-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (item.classList.contains('selected')) {
+        item.classList.remove('selected');
+        item.querySelector('input').checked = false;
+      } else {
+        item.classList.add('selected');
+        item.querySelector('input').checked = true;
+      }
+      updateProgress();
+    });
+  });
 
-  <div class="strategy-box">
-    <div class="strategy-title">📌 Contexto & Abordagem</div>
-    <p class="strategy-text">
-      O cliente atua como <strong style="color:#f5f5f0">revendedor de equipamentos importados</strong> — o lucro vem da comissão/margem sobre a venda, não do valor bruto do produto. Isso muda o cálculo de ROI: a campanha precisa gerar <strong style="color:#f5f5f0">leads qualificados suficientes para fechar 2 a 3 vendas por mês</strong>, priorizando os produtos de maior margem.<br><br>
-      A estratégia é segmentar por perfil de comprador (proprietários de academia, gestores fitness, investidores) e conduzir o lead a um processo consultivo — o papel do digital é <strong style="color:#f5f5f0">gerar o contato, a venda é feita pelo time comercial.</strong>
-    </p>
-  </div>
+  function countAnswered() {
+    let count = 0;
+    const radioGroups = new Set();
+    document.querySelectorAll('.radio-item.selected input').forEach(inp => {
+      radioGroups.add(inp.name);
+    });
+    count += radioGroups.size;
 
-  <!-- ROI REAL -->
-  <div class="card" style="margin-bottom:12px">
-    <div class="card-header">
-      <div class="card-title">
-        <div class="card-icon">📈</div>
-        Análise de ROI Real — Por Faixa de Produto
-      </div>
-      <span class="card-tag tag-midia">Retorno Esperado</span>
-    </div>
-    <div class="card-body">
-      <div class="item-row">
-        <div>
-          <div class="item-name">🔴 Produto Entrada — R$ 23.000 (margem menor)</div>
-          <div class="item-desc">Margem estimada: R$ 2.000–4.000 por venda. Custo total mensal da campanha (gestão + mídia): ~R$ 3.400. <strong style="color:#f5f5f0">Precisaria de 1 a 2 vendas/mês só para cobrir o investimento em marketing.</strong> Produto válido para volume e para aquecer o relacionamento, mas não deve ser o foco dos anúncios de maior investimento.</div>
-        </div>
-        <div class="item-price" style="color:var(--red)">Margem apertada<span class="unit">foco em volume</span></div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">🟡 Produto Intermediário — R$ 50k–80k</div>
-          <div class="item-desc">Margem estimada: R$ 8.000–18.000 por venda. <strong style="color:#f5f5f0">1 venda já cobre 2 a 5 meses de campanha completa.</strong> Boa relação custo-benefício para anúncios de qualificação.</div>
-        </div>
-        <div class="item-price" style="color:var(--gold)">ROI positivo<span class="unit">1 venda = meses pagos</span></div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">🟢 Produto Premium — R$ 140.000 (lucro ~R$ 30.000)</div>
-          <div class="item-desc">Com lucro estimado de R$ 30.000 por unidade, <strong style="color:#f5f5f0">uma única venda por trimestre já paga 8 meses de campanha completa.</strong> Este deve ser o produto âncora da estratégia — a campanha é desenhada para atrair o decisor que compra este equipamento.</div>
-        </div>
-        <div class="item-price" style="color:var(--green)">Alto ROI<span class="unit">1 venda = 8 meses</span></div>
-      </div>
-      <div class="item-row" style="background:rgba(62,207,142,0.04)">
-        <div>
-          <div class="item-name">✅ Cenário Meta: 2 vendas/mês (mix de produtos)</div>
-          <div class="item-desc">Sendo conservador: 1 venda intermediária (R$ 10k de lucro) + 1 venda de entrada (R$ 3k de lucro) = <strong style="color:#f5f5f0">R$ 13.000 de lucro/mês</strong> contra R$ 3.400 de investimento total em marketing. <strong style="color:#f5f5f0">ROI de ~280%.</strong> Uma venda premium no mês eleva o ROI para mais de 1.000%.</div>
-        </div>
-        <div class="item-price" style="color:var(--green)">ROI ~280%<span class="unit">cenário base</span></div>
-      </div>
-    </div>
-  </div>
+    const checkGroups = new Set();
+    document.querySelectorAll('.check-item.selected input').forEach(inp => {
+      if (inp.checked) checkGroups.add(inp.name);
+    });
+    count += checkGroups.size;
 
-  <div class="alert">
-    <strong>🎯 Recomendação estratégica:</strong> Os anúncios de maior verba devem ser direcionados para os produtos de <strong>R$ 80k–140k</strong>, onde a margem justifica com folga o custo de aquisição do lead. O produto de R$ 23k entra como <strong>"porta de entrada"</strong> no Instagram orgânico e em remarketing para quem já demonstrou interesse mas não fechou o premium.
-  </div>
+    document.querySelectorAll('textarea, input[type="text"], input[type="email"], input[type="tel"]').forEach(inp => {
+      if (inp.value.trim().length > 2) count++;
+    });
 
-  <!-- ===== FASE 1: SETUP ===== -->
-  <div class="section-title">
-    <span class="section-num">FASE 01</span>
-    <h2>Setup & Estrutura Inicial</h2>
-    <div class="section-line"></div>
-  </div>
+    return Math.min(count, 28);
+  }
 
-  <div class="alert">
-    <strong>⚡ Entrega única — cobrada apenas uma vez.</strong> Tudo que é necessário para existir digitalmente e rodar campanhas de forma profissional e rastreável.
-  </div>
+  function updateProgress() {
+    const count = countAnswered();
+    const pct = Math.round((count / 28) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('navCount').textContent = count;
+  }
 
-  <!-- 1.1 Contas e Portfólio -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <div class="card-icon">🏢</div>
-        Criação e Configuração de Contas & Portfólio
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="card-tag tag-setup">Setup</span>
-        <span class="price-badge">R$ 600</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="item-row">
-        <div>
-          <div class="item-name">Meta Business Manager (Portfólio Empresarial)</div>
-          <div class="item-desc">Criação do BM, configuração do portfólio empresarial, domínio verificado, configurações de segurança de conta e papéis de acesso (admin, anunciante, parceiro).</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Conta de Anúncios do Meta Ads</div>
-          <div class="item-desc">Abertura da conta de anúncios vinculada ao BM, método de pagamento configurado, limites e aprovação inicial.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Pixel do Meta (Facebook Pixel)</div>
-          <div class="item-desc">Criação e instalação do Pixel na landing page, configuração de eventos (PageView, Lead, Contact) e teste via Events Manager.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Google Ads — Conta MCC e conta do cliente</div>
-          <div class="item-desc">Criação da conta Google Ads, vinculação ao MCC da agência, configuração de faturamento, conversões e tag global do site.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Google Search Console + Google Analytics 4</div>
-          <div class="item-desc">Configuração de GA4, vinculação ao Google Ads, metas de conversão (clique no WhatsApp, formulário), painel de relatórios.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Google Tag Manager</div>
-          <div class="item-desc">Implantação do GTM na landing page para disparo de pixels, tags de conversão e rastreamento centralizado.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-    </div>
-  </div>
+  document.querySelectorAll('textarea, input[type="text"], input[type="email"], input[type="tel"]').forEach(inp => {
+    inp.addEventListener('input', updateProgress);
+  });
 
-  <!-- 1.2 Landing Page -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <div class="card-icon">🖥️</div>
-        Landing Page / Site do Produto — Criação Completa
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="card-tag tag-setup">Setup</span>
-        <span class="price-badge">R$ 2.200</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="item-row">
-        <div>
-          <div class="item-name">Domínio (.com.br ou .com)</div>
-          <div class="item-desc">Registro do domínio da marca por 1 ano (ex: equipamentosxxx.com.br). Incluso na hospedagem anual.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Hospedagem — Plano Anual</div>
-          <div class="item-desc">Hospedagem compartilhada ou VPS leve (ex: Hostinger, KingHost), SSL grátis, e-mail profissional configurado, painel cPanel.</div>
-        </div>
-        <div class="item-price">R$ 350
-          <span class="unit">anual</span>
-        </div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Desenvolvimento da Landing Page (WordPress + Elementor Pro)</div>
-          <div class="item-desc">Design exclusivo focado em conversão: hero com proposta de valor, seção de benefícios dos equipamentos, galeria de produtos com especificações, depoimentos/cases, formulário de solicitação de orçamento (integrado ao WhatsApp e e-mail), CTA fixo mobile.</div>
-        </div>
-        <div class="item-price">R$ 1.850
-          <span class="unit">único</span>
-        </div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Otimização SEO On-Page Inicial</div>
-          <div class="item-desc">Meta tags, títulos, descrições, velocidade básica (compressão de imagens, cache), sitemap e robots.txt para indexação no Google.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Integração Pixel + GTM + GA4 no Site</div>
-          <div class="item-desc">Todos os rastreadores instalados e testados via DebugView e Meta Events Manager.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-    </div>
-  </div>
+  async function submitForm() {
+    const nome = document.getElementById('nome').value.trim();
+    if (!nome) {
+      alert('Por favor, preencha pelo menos o seu nome antes de enviar.');
+      return;
+    }
 
-  <!-- 1.3 Instagram -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <div class="card-icon">📱</div>
-        Setup do Instagram Profissional
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="card-tag tag-setup">Setup</span>
-        <span class="price-badge">R$ 350</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="item-row">
-        <div>
-          <div class="item-name">Criação e Otimização do Perfil Comercial</div>
-          <div class="item-desc">Bio estratégica com palavras-chave, foto de perfil profissional, link na bio (Linktree ou página própria), destaques criados e organizados, conta convertida para Perfil Comercial e vinculada ao BM.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Identidade Visual — Kit básico para feed</div>
-          <div class="item-desc">Paleta de cores, tipografia e template padrão para posts e stories (3 layouts editáveis entregues).</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-    </div>
-  </div>
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
 
-  <!-- ===== FASE 2: GESTÃO MENSAL ===== -->
-  <div class="section-title">
-    <span class="section-num">FASE 02</span>
-    <h2>Gestão Mensal — Tráfego & Social Media</h2>
-    <div class="section-line"></div>
-  </div>
+    const data = {
+      nome: document.getElementById('nome').value,
+      empresa: document.getElementById('empresa').value,
+      whatsapp: document.getElementById('whatsapp').value,
+      email: document.getElementById('email').value,
+      q1_contrato_assinado: (document.querySelector('input[name="q1"]:checked') || {}).value || '-',
+      q2_exclusividade: (document.querySelector('input[name="q2"]:checked') || {}).value || '-',
+      q3_margem_comissao: document.getElementById('q3').value || '-',
+      q4_prazo_vigencia: document.getElementById('q4').value || '-',
+      q5_splan_vende_direto: (document.querySelector('input[name="q5"]:checked') || {}).value || '-',
+      q6_modelos_autorizados: document.getElementById('q6').value || '-',
+      q7_maior_margem: document.getElementById('q7').value || '-',
+      q8_acesso_equipamento: (document.querySelector('input[name="q8"]:checked') || {}).value || '-',
+      q9_prazo_entrega: document.getElementById('q9').value || '-',
+      q10_garantia: document.getElementById('q10').value || '-',
+      q11_cases: (document.querySelector('input[name="q11"]:checked') || {}).value || '-',
+      q12_territorio: (document.querySelector('input[name="q12"]:checked') || {}).value || '-',
+      q12b_regioes: document.getElementById('q12b').value || '-',
+      q13_publico_ideal: Array.from(document.querySelectorAll('input[name="q13"]:checked')).map(function(i){return i.value;}).join(', ') || '-',
+      q14_contatos_existentes: document.getElementById('q14').value || '-',
+      q15_nichos_evitar: document.getElementById('q15').value || '-',
+      q16_quem_atende: (document.querySelector('input[name="q16"]:checked') || {}).value || '-',
+      q17_canal_preferido: (document.querySelector('input[name="q17"]:checked') || {}).value || '-',
+      q18_tempo_resposta: (document.querySelector('input[name="q18"]:checked') || {}).value || '-',
+      q19_proposta_pronta: (document.querySelector('input[name="q19"]:checked') || {}).value || '-',
+      q20_ciclo_venda: (document.querySelector('input[name="q20"]:checked') || {}).value || '-',
+      q21_logo: (document.querySelector('input[name="q21"]:checked') || {}).value || '-',
+      q22_material_splan: (document.querySelector('input[name="q22"]:checked') || {}).value || '-',
+      q23_identidade_visual: document.getElementById('q23').value || '-',
+      q24_cnpj_email: (document.querySelector('input[name="q24"]:checked') || {}).value || '-',
+      q25_cartao: (document.querySelector('input[name="q25"]:checked') || {}).value || '-',
+      q26_expectativa: document.getElementById('q26').value || '-',
+      q27_entende_divisao: (document.querySelector('input[name="q27"]:checked') || {}).value || '-',
+      q28_investimento_midia: (document.querySelector('input[name="q28a"]:checked') || {}).value || '-',
+      observacoes: document.getElementById('q_extra').value || '-'
+    };
 
-  <div class="alert">
-    <strong>🔄 Recorrência mensal — contrato mínimo recomendado: 3 meses.</strong> Campanhas de alto ticket precisam de tempo de aprendizado e otimização para gerar resultados consistentes.
-  </div>
+    try {
+      var response = await fetch('https://formspree.io/f/xdajkqab', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
 
-  <!-- 2.1 Gestão Google Ads -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <div class="card-icon">🔍</div>
-        Gestão de Tráfego — Google Ads
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="card-tag tag-mensal">Mensal</span>
-        <span class="price-badge">R$ 800/mês</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="item-row">
-        <div>
-          <div class="item-name">Campanha de Pesquisa (Search)</div>
-          <div class="item-desc">Palavras-chave de alta intenção de compra: "esteira profissional preço", "equipamentos academia importado", "comprar equipamento fitness profissional". Anúncios responsivos com extensões de chamada, sitelinks e formulário de lead.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Campanha de Display / Remarketing</div>
-          <div class="item-desc">Reimpacto de visitantes que acessaram a landing page mas não converteram. Banners em diferentes formatos adaptados automaticamente pelo Google.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Otimização Semanal de Campanhas</div>
-          <div class="item-desc">Ajuste de lances, exclusão de termos negativos, teste A/B de anúncios, análise de qualidade do lead e relatório quinzenal.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Relatório Mensal Detalhado</div>
-          <div class="item-desc">CPL (custo por lead), impressões, cliques, CTR, conversões e recomendações estratégicas para o próximo mês.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.2 Gestão Meta Ads -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <div class="card-icon">📘</div>
-        Gestão de Tráfego — Meta Ads (Instagram + Facebook)
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="card-tag tag-mensal">Mensal</span>
-        <span class="price-badge">R$ 700/mês</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="item-row">
-        <div>
-          <div class="item-name">Campanha de Geração de Leads</div>
-          <div class="item-desc">Segmentação por interesse (proprietários de academia, gestores fitness, investidores), comportamento de compra e lookalike de base de clientes. Objetivo: formulário ou clique no WhatsApp.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Campanha de Tráfego para Landing Page</div>
-          <div class="item-desc">Anúncio em feed, stories e reels direcionando para o site. Pixel rastreando conversões para otimização automática pelo algoritmo.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Criação de Criativos (Artes para Anúncio)</div>
-          <div class="item-desc">Até 4 criativos mensais (estáticos ou vídeo curto) exclusivos para anúncio — não reaproveitados do feed orgânico. Testes A/B de copy e imagem.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Remarketing e Exclusão de Audiências</div>
-          <div class="item-desc">Reimpacto de visitantes do site, engajadores do Instagram e exclusão de leads já convertidos para não queimar verba.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2.3 Social Media -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <div class="card-icon">✨</div>
-        Social Media — Instagram Orgânico
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="card-tag tag-mensal">Mensal</span>
-        <span class="price-badge">R$ 900/mês</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="item-row">
-        <div>
-          <div class="item-name">Planejamento Editorial Mensal</div>
-          <div class="item-desc">Calendário de conteúdo aprovado previamente, estratégia de pilares (autoridade técnica, produto em uso, cases, bastidores importação, prova social).</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">12 Posts no Feed (3x por semana)</div>
-          <div class="item-desc">Artes com design profissional, copy estratégica com CTA. Formatos variados: carrossel educativo, post simples, comparativo de produtos.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">16 Stories por Mês</div>
-          <div class="item-desc">Frequência de 4 stories/semana com enquetes, perguntas, bastidores e CTA para WhatsApp ou landing page.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">4 Reels por Mês</div>
-          <div class="item-desc">Edição de vídeos curtos (15–30s) com roteiro e legendas. Conteúdo enviado pelo cliente ou captado remotamente. Reels têm alcance orgânico superior e atraem decisores.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Monitoramento e Resposta de Comentários/DMs</div>
-          <div class="item-desc">Gestão da caixa de entrada em dias úteis, resposta a comentários, encaminhamento de leads qualificados para o cliente fechar.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Relatório Mensal de Métricas</div>
-          <div class="item-desc">Alcance, impressões, engajamento, crescimento de seguidores, melhores posts e direcionamento para o próximo mês.</div>
-        </div>
-        <div class="item-price">incluso</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== INVESTIMENTO EM MÍDIA ===== -->
-  <div class="section-title">
-    <span class="section-num">FASE 03</span>
-    <h2>Investimento em Mídia Paga</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="alert alert-red">
-    <strong>⚠️ Importante:</strong> O investimento em mídia é pago <strong>diretamente ao Google e ao Meta</strong> pelo cliente, via cartão de crédito ou boleto cadastrado nas plataformas. Este valor <strong>não passa pela agência</strong> e não está incluído na gestão.
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <div class="card-icon">💰</div>
-        Distribuição do Investimento em Mídia
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="card-tag tag-midia">Mídia</span>
-        <span class="price-badge">R$ 1.000 – R$ 1.500/mês</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="item-row">
-        <div>
-          <div class="item-name">Google Ads — Investimento Sugerido</div>
-          <div class="item-desc">Foco em Search (palavras-chave transacionais de alto ticket). Menor volume, mas lead mais qualificado. Recomendado maior parcela aqui para produto B2B de alto valor.</div>
-        </div>
-        <div class="item-price">R$ 600 – 900
-          <span class="unit">/ mês</span>
-        </div>
-      </div>
-      <div class="item-row">
-        <div>
-          <div class="item-name">Meta Ads — Investimento Sugerido</div>
-          <div class="item-desc">Ideal para geração de demanda, remarketing e alcance visual do produto. Lead tende a custar menos, mas com ciclo de conversão mais longo.</div>
-        </div>
-        <div class="item-price">R$ 400 – 600
-          <span class="unit">/ mês</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="alert">
-    <strong>📊 Expectativa realista:</strong> Com R$ 1.000–1.500/mês em mídia, espera-se gerar de 8 a 25 leads qualificados por mês. Desses, a taxa de fechamento consultivo gira em torno de 10–20% — o que projeta <strong>1 a 5 vendas/mês</strong> dependendo do follow-up comercial do cliente. <strong>O digital gera o lead. A venda é responsabilidade do time comercial.</strong>
-  </div>
-
-  <!-- ===== TOTAIS ===== -->
-  <div class="section-title">
-    <span class="section-num">RESUMO</span>
-    <h2>Consolidado Financeiro</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="totals-grid">
-    <div class="total-card setup">
-      <div class="total-label">Setup Inicial (único)</div>
-      <div class="total-value">R$ 3.500</div>
-      <div class="total-sub">Contas + Landing Page + Instagram<br>+ Hospedagem anual inclusa</div>
-    </div>
-    <div class="total-card mensal">
-      <div class="total-label">Gestão Mensal (agência)</div>
-      <div class="total-value">R$ 2.400</div>
-      <div class="total-sub">Google Ads + Meta Ads + Social Media<br>Mínimo 3 meses</div>
-    </div>
-    <div class="total-card investimento">
-      <div class="total-label">Mídia Paga (direto plataformas)</div>
-      <div class="total-value">R$ 1.000</div>
-      <div class="total-sub">Pago pelo cliente ao Google e Meta<br>Valor mínimo sugerido</div>
-    </div>
-  </div>
-
-  <div class="grand-total">
-    <div class="gt-left">
-      <div class="gt-label">◆ Total Primeiro Mês (Setup + Gestão)</div>
-      <div class="gt-desc">Inclui toda a estrutura inicial + 1 mês de gestão completa</div>
-    </div>
-    <div>
-      <div class="gt-value">R$ 5.900</div>
-      <div class="gt-period">+ R$ 1.000–1.500 mídia (pago ao Google/Meta)</div>
-    </div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-    <div class="grand-total" style="padding:20px 24px">
-      <div class="gt-left">
-        <div class="gt-label">◆ A partir do 2º Mês</div>
-        <div class="gt-desc">Só gestão mensal (sem setup)</div>
-      </div>
-      <div>
-        <div class="gt-value" style="font-size:32px">R$ 2.400</div>
-        <div class="gt-period">+ mídia paga</div>
-      </div>
-    </div>
-    <div class="grand-total" style="padding:20px 24px">
-      <div class="gt-left">
-        <div class="gt-label">◆ Investimento Total / 3 meses</div>
-        <div class="gt-desc">Setup + 3 meses de gestão + mídia estimada</div>
-      </div>
-      <div>
-        <div class="gt-value" style="font-size:32px">R$ 15.050</div>
-        <div class="gt-period">Estimativa com R$1.250/mês de mídia</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CRONOGRAMA -->
-  <div class="section-title">
-    <span class="section-num">CRONOGRAMA</span>
-    <h2>Linha do Tempo de Entrega</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="tl-week">Semana 1</div>
-      <div class="tl-title">🛠️ Estrutura & Contas</div>
-      <ul class="tl-items">
-        <li>Criação do BM e conta Meta Ads</li>
-        <li>Criação conta Google Ads + MCC</li>
-        <li>Setup GA4 + GTM</li>
-        <li>Criação e otimização do Instagram</li>
-        <li>Registro de domínio + hospedagem</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-week">Semana 2–3</div>
-      <div class="tl-title">🖥️ Landing Page & Pixel</div>
-      <ul class="tl-items">
-        <li>Desenvolvimento do site</li>
-        <li>Design e copy da LP</li>
-        <li>Instalação Pixel + Tags</li>
-        <li>Testes de conversão</li>
-        <li>Aprovação do cliente</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="tl-week">Semana 3–4</div>
-      <div class="tl-title">🚀 Go Live — Campanhas & Feed</div>
-      <ul class="tl-items">
-        <li>Subida das campanhas Google</li>
-        <li>Subida das campanhas Meta</li>
-        <li>1ª semana de posts no Instagram</li>
-        <li>Monitoramento inicial 24h</li>
-        <li>Ajustes finos pós-lançamento</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- CONDIÇÕES -->
-  <div class="section-title">
-    <span class="section-num">CONDIÇÕES</span>
-    <h2>Termos da Proposta</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="conditions">
-    <div class="condition-item">
-      <div class="cond-icon">📅</div>
-      <div>
-        <div class="cond-title">Prazo de Contrato</div>
-        <div class="cond-text">Mínimo de 3 meses para resultados mensuráveis. Campanhas de alto ticket precisam do período de aprendizado do algoritmo (mínimo 30–45 dias para otimização real).</div>
-      </div>
-    </div>
-    <div class="condition-item">
-      <div class="cond-icon">💳</div>
-      <div>
-        <div class="cond-title">Forma de Pagamento</div>
-        <div class="cond-text">Setup: 50% na assinatura + 50% na entrega da LP. Gestão mensal: pagamento até dia 5 de cada mês. PIX ou boleto.</div>
-      </div>
-    </div>
-    <div class="condition-item">
-      <div class="cond-icon">📁</div>
-      <div>
-        <div class="cond-title">Fornecimento de Material</div>
-        <div class="cond-text">O cliente fornece: fotos/vídeos dos equipamentos, logo em alta resolução, textos institucionais e catálogo de produtos com especificações e preços.</div>
-      </div>
-    </div>
-    <div class="condition-item">
-      <div class="cond-icon">🔐</div>
-      <div>
-        <div class="cond-title">Propriedade das Contas</div>
-        <div class="cond-text">Todas as contas (Google, Meta, domínio, hospedagem) são criadas em nome do cliente. O acesso total pertence ao cliente ao final do contrato.</div>
-      </div>
-    </div>
-    <div class="condition-item">
-      <div class="cond-icon">📊</div>
-      <div>
-        <div class="cond-title">Relatórios e Transparência</div>
-        <div class="cond-text">Relatório quinzenal de tráfego e relatório mensal completo com métricas, análise de resultados e plano de ação para o mês seguinte.</div>
-      </div>
-    </div>
-    <div class="condition-item">
-      <div class="cond-icon">⏳</div>
-      <div>
-        <div class="cond-title">Validade da Proposta</div>
-        <div class="cond-text">Esta proposta é válida por 15 dias corridos a partir da data de emissão. Após esse período, os valores podem ser revisados.</div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-  <div>
-    <div class="footer-brand">PROPOSTA DIGITAL COMPLETA</div>
-    <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace;letter-spacing:1px">EQUIPAMENTOS DE ACADEMIA — ALTO TICKET</div>
-  </div>
-  <div class="footer-info">
-    Emitido em Maio / 2026<br>
-    Proposta confidencial — uso exclusivo do cliente
-  </div>
-</div>
+      if (response.ok) {
+        document.getElementById('main-form').style.display = 'none';
+        document.getElementById('successScreen').classList.add('show');
+        document.getElementById('progressBar').style.width = '100%';
+        document.getElementById('navCount').textContent = '28';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        btn.textContent = 'Enviar briefing';
+        btn.disabled = false;
+        alert('Erro ao enviar. Verifique sua conexão e tente novamente.');
+      }
+    } catch(err) {
+      btn.textContent = 'Enviar briefing';
+      btn.disabled = false;
+      alert('Erro ao enviar. Verifique sua conexão e tente novamente.');
+    }
+  }
+</script>
 
 </body>
 </html>
