@@ -1011,19 +1011,21 @@
     });
   });
 
-  document.querySelectorAll('.check-item').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (item.classList.contains('selected')) {
-        item.classList.remove('selected');
-        item.querySelector('input').checked = false;
-      } else {
-        item.classList.add('selected');
-        item.querySelector('input').checked = true;
-      }
-      updateProgress();
-    });
+ document.querySelectorAll('.check-item').forEach(function(item) {
+
+  item.addEventListener('click', function() {
+
+    const input = item.querySelector('input');
+
+    input.checked = !input.checked;
+
+    item.classList.toggle('selected', input.checked);
+
+    updateProgress();
+
   });
+
+});
 
   function countAnswered() {
     let count = 0;
